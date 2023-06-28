@@ -26,26 +26,34 @@
 
 
 ## 🔶🔶Introduction:
-This following app helps to classify a image using Azure services and uses `Microsoft Azure` made with `JS & HTML5`.
+The following app helps to classify an image using Azure services and uses `Microsoft Azure` made with `JS & HTML5`.
 
-<!--  -->
+<img width="959" alt="image" src="https://github.com/RishiPratap/Image-classification-App/assets/72687585/afaa900f-0ffd-4855-8aeb-3fc033b879ae">
+
 
 ## 🔥 Azure Static Web App Services
-Using `Azure Static Web App` service I have deployed my app frontend `HTML CSS JS and assets files and folder`.
+Using the `Azure Static Web App` service I have deployed my app frontend `HTML CSS JS and assets files and folder`.
 
 <!--  -->
 
 ## 🅱️ Azure Bot Services:
+Using `Azure Bot Services` I have deployed the chatbot and Q&A maker services.
 
-Uisng `Azure Bot Services` I have deployed the chatbot and Q&A maker services.
+<img width="960" alt="image" src="https://github.com/RishiPratap/Image-classification-App/assets/72687585/d4d8b411-cc72-4371-bced-55ffbf2343c5">
+
 
 
 ## 🕸️Azure Language Studio:
+Using Azure Language Studio I have prepared the questions and answer for a chatbot.
+
+<img width="754" alt="image" src="https://github.com/RishiPratap/Image-classification-App/assets/72687585/1069f2de-810b-4b2c-baea-10ffe3bafba9">
 
 
 
 ## 📌 Azure Custom Vision:
-Using `Azure Custom Vision` I have trained my model to classify the images.
+I have trained my model to classify the images using' Azure Custom Vision'.
+
+<img width="960" alt="image" src="https://github.com/RishiPratap/Image-classification-App/assets/72687585/1a2fe891-363f-44b3-bc79-797159bd7220">
 
 
 ## 🌈Installing (from source code):
