@@ -34,7 +34,8 @@ The following app helps to classify an image using Azure services and uses `Micr
 ## 🔥 Azure Static Web App Services
 Using the `Azure Static Web App` service I have deployed my app frontend `HTML CSS JS and assets files and folder`.
 
-<!--  -->
+<img width="892" alt="image" src="https://github.com/RishiPratap/Image-classification-App/assets/72687585/4c2b75d5-57df-4f60-bc11-a04d83d2fe15">
+
 
 ## 🅱️ Azure Bot Services:
 Using `Azure Bot Services` I have deployed the chatbot and Q&A maker services.
