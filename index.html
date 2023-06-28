@@ -1,0 +1,304 @@
+<html>
+    <head>
+        <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+        <link rel="icon" href="https://img.icons8.com/external-becris-lineal-color-becris/344/external-task-business-management-becris-lineal-color-becris.png" type="image/png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>  
+        <title>
+            Image classfication Bot
+        </title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+            body{
+                padding:10px;
+                margin:0px;
+                font-family: 'Ubuntu', sans-serif;
+                background: #25163d;
+                color: orange;
+            }
+           
+            #nav{
+                text-align: center;
+            }
+            
+            .Explore {
+            -webkit-animation: anime 16s linear infinite;
+            animation: anime 16s linear infinite;
+            background: linear-gradient(-45deg,#ffa63d,#ff3d77,#338aff,#3cf0c5);
+            background-size: 600%;
+            border-radius: 50%;
+            color: hsla(0,0%,100%,.9);
+            -webkit-filter: blur(100px);
+            filter: blur(100px);
+            height: 250px;
+            line-height: 100px;
+            opacity: .8;
+            position: absolute;
+            text-align: center;
+            width: 250px;
+            z-index: -1;
+    
+        }
+        
+        .open-button {
+        background-color: rgb(230, 89, 8);
+        color: rgb(247, 244, 243);
+        padding: 16px 20px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        border: none;
+        margin: 10px 10px;
+        cursor: pointer;
+        opacity: 0.8;
+        position: fixed;
+        z-index: 1;
+        bottom: 0px;
+        right: 0px;
+        border-radius: 30px;
+        width: 180px;
+        }
+
+        /* The popup chat - hidden by default */
+        .chat-popup {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        right: 15px;
+        z-index: 9;
+        }
+
+        /* Add styles to the form container */
+        .form-container {
+        max-width: 300px;
+        padding: 10px;
+        background-color: white;
+        }
+
+        /* Full-width textarea */
+        .form-container textarea {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1;
+        resize: none;
+        min-height: 200px;
+        }
+
+        /* When the textarea gets focus, do something */
+        .form-container textarea:focus {
+        background-color: #ddd;
+        outline: none;
+        }
+
+        /* Set a style for the submit/send button */
+        .form-container .btn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom:10px;
+        opacity: 0.8;
+        }
+
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+        background-color: red;
+        }
+
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+        opacity: 1;
+        }
+        .buttons-nav{
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .card{
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+        .card-header{
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        padding: 20px;
+        height: 300px;
+        width: 50%;
+        }
+        #image-upload{
+        position: relative;
+        display: inline-block;
+        width: 200px;
+        height: 40px;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 10px;
+        overflow: hidden;
+        text-align: center;
+        }
+        #preview-image {
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        .buttons-nav{
+            padding: 10px;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .btn{
+        background-color: #04AA6D;
+        color: white;
+        padding:5px;
+        border-radius: 5px;
+        border: greenyellow;
+        cursor: pointer;
+        margin-left:10px;
+        opacity: 0.8;
+        }
+        .loader {
+    display: none;
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #3498db;
+    width: 15px;
+    margin: 5px;
+    height: 15px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+   }
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+        </style>
+    </head>
+    <body>
+        <div id="nav">
+            <h1>Image Classifier App</h1>
+            <br>   
+        <a href="https://webchat.botframework.com/embed/chat-bot-help-bot?s=7Bu1-0Bi1no.GhzQxqXgfWHY_PZkl53_L77mpoGjhwULFMWn9qie80Y"
+            onclick="window.open(this.href,'targetWindow',
+                                            `toolbar=no,
+                                             location=no,
+                                             status=no,
+                                             menubar=no,
+                                             scrollbars=yes,
+                                             resizable=yes,
+                                             width=500,
+                                             height=500`);
+          return false;"><button class="open-button"><i class="fas fa-comment-dots"></i> Chat </button></a>
+        </div>
+        <div class="Explore"></div>
+        <div class="card">
+            <h2>Enter Image Url</h2>
+            <div class="card-header">
+                <input type="text" id="image-upload" placeholder="Enter Url of image" required>
+                <img id="preview-image" src="https://static.thenounproject.com/png/737525-200.png" alt="Preview Image">
+                <div class="buttons-nav">
+                    <button class="btn" onclick="handleFileUpload()">Upload</button>
+                    <button class="btn" id="clear-button" onclick="clearImage()">Clear</button>
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+    const imageUpload = document.getElementById('image-upload');
+    const previewImage = document.getElementById('preview-image');
+    const clearButton = document.getElementById('clear-button');
+
+    imageUpload.addEventListener('change', function() {
+    const file = imageUpload.value;
+    if (file) {
+        previewImage.src = file;
+    }
+    });
+
+    function clearImage() {
+    previewImage.src = 'https://static.thenounproject.com/png/737525-200.png';
+    imageUpload.value = '';
+    }
+        </script>
+        <script>
+        function handleFileUpload() {
+            document.querySelector('.loader').style.display = 'block';
+            const imageUpload = document.getElementById('image-upload');
+            const imageval = imageUpload.value;
+            const url = "https://prediction123alpha-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/9792b027-3700-41e8-b64a-88bd9839fd9b/classify/iterations/Iteration3/url";
+            const headers = {
+            "Prediction-Key": "fec8d59170174bcbb75bb95b67753900",
+            "Content-Type": "application/json"
+            };
+
+            const formData = {
+                "Url": imageval
+            }
+
+            const data = JSON.stringify(formData);
+
+            console.log(data);
+
+            fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: data
+            })
+                .then(response => response.json())
+                .then(data => {
+                // Handle the response data
+                document.querySelector('.loader').style.display = 'none';
+                console.log(data);
+                console.log(data.predictions[0].tagName);
+                Swal.fire({
+            title: '<strong>Results</strong>',
+            html:
+                'The image is of <b>'+data.predictions[0].tagName+'</b> with a confidence of <b>'+data.predictions[0].probability*100+'</b>'
+                +'<br>The image is of <b>'+data.predictions[1].tagName+'</b> with a confidence of <b>'+data.predictions[1].probability*100+'</b>'
+                +'<br>The image is of <b>'+data.predictions[2].tagName+'</b> with a confidence of <b>'+data.predictions[2].probability*100+'</b>',
+            allowOutsideClick: false,
+            })
+                })
+                .catch(error => {
+                // Handle the error
+                console.error(error);
+                Swal.fire({
+            title: '<strong>Error</strong>',
+            html:
+                'There was an error in processing the image',
+            allowOutsideClick: false,
+            })
+                });
+            }
+        </script>
+    </body>
+</html>
